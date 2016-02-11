@@ -23,14 +23,14 @@ import argparse, os
 #
 #   -restart : reset machine to original settings
 #
-#       e.g. python --restart 
+#       e.g. sudo python --restart 
 #
 def parse_args():
 
     #arg parsing
 
     arg = len(sys.argv)
-    if arg == 1 and sys.argv[2] == '-restart':
+    if arg == 1 and sys.argv[2] == '-restart':					# make sure this is argv[2] instead of argv[1]
 	os.execv('./wifi_back_on.sh', ["sudo", "wifi_back_on.sh"])
  
     parser = argparse.ArgumentParser(description = 'Python wrapper + argument parser for dual.sh wifi script')
