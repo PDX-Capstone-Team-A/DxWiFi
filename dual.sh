@@ -38,7 +38,6 @@ iw $devname set bitrates legacy-2.4 1 && sleep 1
 iw phy $2 set rts -1
 
 
-
 #################
 # DISCLAIMER!!!!
 ######untested#######
