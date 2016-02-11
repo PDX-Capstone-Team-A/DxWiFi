@@ -97,7 +97,17 @@ def receiver():
     os.execv('./testing/receive.py', ["python3", "receive.py", int(dist), ipAddr, port])  # fix this line after receive.py get's updated
 
 def help():
-    print("ADD ALL THIS HERE")
+    print("\n <>--Help Menu--<>")
+    print("\n Example usage:\n")
+    print(" To restart WiFi -> sudo python3 wifi_wrap.py -restart wlan1\n")
+    print(" Setup non-default adhoc Wifi -> sudo python3 wrap.py -i 10.0.0.10 -d phy1 -c wlan1\n")
+    print(" Setup defualt adhoc Wifi & Test -> sudo python3 wrap.py -i 10.0.0.10 -d phy1 -c wlan1 -t")
+    print("\n\n Optional Options:")
+    print(" -i <IP>\t\tUse to pick IP Address. Default: 10.0.0.8")
+    print(" -d <driver>\t\tUse to pick phy#. Default: phy0")
+    print(" -c <card>\t\tUse to pick device. Default: wlan0")
+    print(" -pwr <integer>\t\tUse to pick txpower in dBm . Default: 20")
+    print(" -t\t\t\tUse -t to turn on testing, follow the instructions on screen\n\n")
 
 argsT = parse_args()
 run_tests(argsT)
