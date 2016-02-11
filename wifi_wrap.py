@@ -8,7 +8,6 @@ History:
 """
 import argparse, os
 
-
 #
 # The purpose of this script is to wrap dual.sh and check that necessary arguments are supplied
 # by the user. The script also provides user help and allows user to put args in any order.
@@ -22,10 +21,18 @@ import argparse, os
 #
 #       e.g. python wifi_wrap.py -i 10.0.0.9 -d phy0 -c wlan0
 #
+#   -restart : reset machine to original settings
+#
+#       e.g. python --restart 
+#
 def parse_args():
 
     #arg parsing
 
+    arg = len(sys.argv)
+    if arg == 1 and sys.argv[2] == '-restart':
+	os.execv('./wifi_back_on.sh', ["sudo", "wifi_back_on.sh"])
+ 
     parser = argparse.ArgumentParser(description = 'Python wrapper + argument parser for dual.sh wifi script')
     parser.add_argument('-i', '-ip', required=True, help='e.g. 10.0.0.9')
     parser.add_argument('-d', '-driver', required=True, help='e.g. phy0')
