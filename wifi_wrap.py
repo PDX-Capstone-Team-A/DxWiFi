@@ -102,7 +102,7 @@ def help():
     print(" To restart WiFi -> sudo python3 wifi_wrap.py -restart wlan1\n")
     print(" Setup non-default adhoc Wifi -> sudo python3 wrap.py -i 10.0.0.10 -d phy1 -c wlan1\n")
     print(" Setup defualt adhoc Wifi & Test -> sudo python3 wrap.py -i 10.0.0.10 -d phy1 -c wlan1 -t")
-    print("\n\n Optional Options:")
+    print("\n\n Options:")
     print(" -i <IP>\t\tUse to pick IP Address. Default: 10.0.0.8")
     print(" -d <driver>\t\tUse to pick phy#. Default: phy0")
     print(" -c <card>\t\tUse to pick device. Default: wlan0")
