@@ -1,100 +1,82 @@
 #!/usr/bin/env python3
-#possible issues: Might have issues because we only accept ipv4. Remove error checking or add extra checking
-#if you need to use ipv6
 
-# if you want to run default settings, then run python3 receive.py
-# if you call with multiple args:
-# first arg = distance of test
-# second arg = receiving machine's IP
-# third arg = port used
+import sys, os, socket, argparse, ipaddress, datetime, select, csv
 
-import socket
-import sys
-import select
-import os
-import datetime
-import os.path
-import csv
+#
+# Usage: 
+#
+# receive.py [-d distance] [-i ip] [-p port]
+#
+# arg 		type        default 	description
+# ---------------------------------------------------------------------------------
+# distance 	int         0 			distance in meters between sender and receiver
+# ip 		string      10.0.0.8 	IPv4 address of receiver/this computer
+# port 		int         5005 		port used
+#
 
-args = len(sys.argv)
+OUTPUT = "wifi_test_data.csv"
 
-if args < 2:
-	distance = None
-else:
-	try:
-		distance = int(sys.argv[1])
-		if distance < 0:
-			print("First argument (" + sys.argv[1] + ") (distance of test) must be a non negative integer. \n Exiting program")
-			sys.exit()
+# Parse arguments
+parser = argparse.ArgumentParser(
+	prog="receive.py",
+	description='Receive UDP packets across an ad-hoc network.',
+	formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-d", "--distance", type=int, default=0, metavar='', help="distance in meters between sender and receiver (type: %(type)s)")
+parser.add_argument("-i", "--ip", type=str, default="10.0.0.8", metavar='', help="IPv4 address of receiver/this computer (type: %(type)s)")
+parser.add_argument("-p", "--port", type=int, default=5005, metavar='', help="port used (type: %(type)s)")
 
-	except ValueError:
-		print("First argument (" + sys.argv[1] + ") (distance of test) must be a non negative integer. \n Exiting program")
-		sys.exit()
-if args < 3:
-	UDP_IP = "10.0.0.8" #receivers ip address
-else:
-	UDP_IP = str(sys.argv[2])
-	pieces = UDP_IP.split('.')
-	if len(pieces) != 4:
-		#if len(pieces) != 6:
-		print("Second argument (" + sys.argv[2] + ") must be a valid ip4v address. \n Exiting program")
-		sys.exit()
-	try: 
-		for p in pieces:
-			if int(p) < 0:
-				print("Second argument (" + sys.argv[2] + ") must be a valid ip4v address. \n Exiting program")
-				sys.exit()
-			elif int(p) >= 256:
-				print("Second argument (" + sys.argv[2] + ")must be a valid ip4v address. \n Exiting program")
-				sys.exit()
-	except ValueError:
-		print("Second argument (" + sys.argv[2] + ") must be a valid ip4v address. \n Exiting program")
-		sys.exit()
-if args < 4:
-	UDP_PORT = 5005
-else:
-	try:
-		UDP_PORT = int(sys.argv[3])
-	except ValueError:
-		print("Third argument (" + sys.argv[3] + ") (port to receive on) must be an integer. \n Exiting program")
-		sys.exit()
+args = parser.parse_args()
+
+# Setup socket
+try:  # Validate IPv4 address
+	UDP_IP = str(ipaddress.IPv4Address(args.ip))
+except ipaddress.AddressValueError:
+	print(args.ip + " is not a valid IPv4 address.")
+	sys.exit()
+
+UDP_PORT = args.port
 
 sock = socket.socket(socket.AF_INET,  # Internet
                      socket.SOCK_DGRAM)  # UDP
 try:
 	sock.bind((UDP_IP, UDP_PORT))
 except:
-	print("Could not bind to the IP address provided. \nPlease provide the IP address of this computer as the second argument.")
+	print(str(UDP_IP) + " is not the IP address of this computer.\nThis computer's IP address may have been configured by the calling program.")
 	sys.exit()
-filename = "wifi_test_data.csv"
-test = os.path.isfile(filename)
-#print filename
+
+# Setup csv file for output
+test = os.path.isfile(OUTPUT)
 if test == False:
-	csv = open(str(filename) , "a")
+	csv = open(OUTPUT, "a")
 	csv.write("test_number,file_sent,total_sent,time_sent,delay,number_received,time_received,distance" + "\n")
 	test_number = 1
 else:
-	reader = csv.reader(open(filename), delimiter=',')
+	reader = csv.reader(open(OUTPUT), delimiter=',')
 	for row in reader:
 		test_number = row[0]
 	if test_number == "test_number":
 		test_number = 0
-	csv = open(str(filename) , "a")
+	csv = open(OUTPUT, "a")
 	test_number = int(test_number) + 1
+
+# Receive packets and write info for each to output file
 print ("test number:", test_number)
+print("Enter 'Ctrl+C' to stop receiving")
+
 count = 0
-print("Enter 'Ctrl+c' to stop receiving")
 try:
 	while True:
 		data, addr = sock.recvfrom(1024)  # Buffer size is 1024 bytes
 		count += 1
-		csv.write(str(test_number) + "," + data.decode("utf-8") + "," + str(count) + "," + str(datetime.datetime.now()) + "," + str(distance) + "\n")
+		csv.write(str(test_number) + "," + data.decode("utf-8") + "," + str(count) + "," + str(datetime.datetime.now()) + "," + str(args.distance) + "\n")
 		print(data.decode("utf-8"))
 except KeyboardInterrupt:
     pass
-print ("\nTotal number of packets caught:", count)
+
+# Display session statistics
+print ("\nTotal number of packets received:", count)
 if test == False:
-	print ("File name created:", csv.name)
+	print ("File created:", csv.name)
 else:
 	print ("Data appended to: " + csv.name + " under test number: " + str(test_number))
 csv.close()

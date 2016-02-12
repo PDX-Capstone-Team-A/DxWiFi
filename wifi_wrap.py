@@ -5,6 +5,7 @@ History:
     rev 1 - Jon-Erik - script skeleton
     rev 2 - Jon-Erik - add support for auto tests
     rev 3 - Jon and Jon-Erik - adding subprocess and more logic
+    rev 4 - Roger - some alterations to work with send.py and receive.py
 """
 import argparse, os, sys, subprocess
 
@@ -47,20 +48,18 @@ def parse_args():
 
     #standard args parse
     args = parser.parse_args()
-    subprocess.call(["./dual.sh", str(args.c), str(args.d), str(args.i)])
-    # "-pwr", str(args.pwr)
-    return args.t
+    return args
 
-def run_tests(argT):
-    if argsT:
+def run_tests(args):
+    if args.t:
         script = input("Type 'S' for sender, 'R' for receiver: ").upper()
         if script == 'S':
             sender()
         if script == 'R':
-            receiver()
+            receiver(args.i)
         else:
             print("Unrecognized Input...\n\n")
-            run_tests(argT)                         # change to while loop if preferred
+            run_tests(args.t)                         # change to while loop if preferred
             return
     else:
         return
@@ -80,21 +79,18 @@ def sender():
     if not port:
         port = '5005'
 
-    os.execv('./testing/send.py', ["python3", "send.py", int(packets), delay, ipAddr, port])  # fix this line after receive.py get's updated
+    os.execv('./testing/send.py', ["send.py", "-p", packets, "-d", delay, "-i", ipAddr, "-p", port])
 
-def receiver():
-    dist    = input("Distance of Test [None]: ")
-    ipAddr  = input("IP Address of Receiver [10.0.0.8]: ")
+def receiver(ipAddr):
+    dist    = input("Distance of Test [0]: ")
     port    = input("Port [5005]: ")
 
     if not dist:
-        dist = None
-    if not ipAddr:
-        ipAddr = '10.0.0.8'
+        dist = '0'
     if not port:
         port = '5005'
 
-    os.execv('./testing/receive.py', ["python3", "receive.py", int(dist), ipAddr, port])  # fix this line after receive.py get's updated
+    os.execv('./testing/receive.py', ["receive.py", "-d", dist, "-i", ipAddr, "-p", port])
 
 def help():
     print("\n <>--Help Menu--<>")
@@ -109,5 +105,7 @@ def help():
     print(" -pwr <integer>\t\tUse to pick txpower in dBm . Default: 20")
     print(" -t\t\t\tUse -t to turn on testing, follow the instructions on screen\n\n")
 
-argsT = parse_args()
-run_tests(argsT)
+args = parse_args()
+subprocess.call(["./dual.sh", str(args.c), str(args.d), str(args.i)])
+# "-pwr", str(args.pwr)
+run_tests(args)
