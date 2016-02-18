@@ -2,11 +2,11 @@
 
 ### These scripts are for sending and receiving UDP packets over a network.
 
-##### For one Linux and one OS X machine:
+#### For one Linux and one OS X machine:
 
-On the Linux machine: 
+On the Linux machine:
 
-* Run the init_wifi_ad_hoc.sh script from the wifi_scripts repo to set up a network called "rockets."  This computer's IP address is set to 10.0.0.8.
+* Run the dual.sh script from the parent directory to set up a network called "rockets."  This computer's IP address is set to 10.0.0.8.
 
 * Run receive.py and wait for sender.
 
@@ -24,23 +24,33 @@ Subnet Mask: 255.255.255.0
 * Run send.py with an integer command-line argument to specify how many packets to send.
 
 
-##### Updates to scripts:
+#### Script arguments
 
-send.py now can take up to 3 arguments. 
+##### send.py
 
-The first argument is the number of packets to send. it defaults to 20 packets at this time. To change amount of packets:
-	python send.py <num of packets>
+send.py can take up to 4 arguments.
 
-The second argument is the IP address to send to. It defualts to 10.0.0.8. If you want to change ip address:
-	python send.py <num of packets> <ip address to send to>
+The first argument is the number of packets to send. It defaults to 20 packets. To change amount of packets, add the flag:
+`-n <num of packets>`
 
-The third argument is the Port to use. It defaults to 5005. If you want to change port:
-	python send.py <num of packets> <ip address to send to> <port>
+The second argument is the delay in seconds between sendings of packets. It defaults to .001. To change the delay, add the flag:
+`-d <delay>`
 
-Recieve has two different scripts. One is just a receive, which puts all information on the screen. This is meant to be used to test connection. The receiveandprint.py will take the information and store it in a .txt file that is @ seperated. Both can take up to 2 arguments.
+The third argument is the IP address to send to. It defualts to 10.0.0.8. To change the ip address, add the flag:
+`-i <ip address to send to>`
 
-The first argument is the IP address of the machine. YOU MUST SPECIFY THE IP OF THE MACHINE USED TO RECEIVE MESSAGES. This defaults to 10.0.0.8. if you want to change the ip address:
-	python receive.py <ip address of machine>
+The fourth argument is the Port to use. It defaults to 5005. To change the port, add the flag:
+`-p <port>`
 
-The second argument is the port to use. It defaults to 5005. If you want to change port:
-	pythong receive.py <ip address of machine> <port>
+##### receive.py
+
+receive.py can take up to 3 arguments.
+
+The first argument is the distance between the sender and receiver. This only affects the output of the script. It defaults to 0. To change the distance, add the flag:
+`-d <distance>`
+
+The second argument is the IP address of the machine. YOU MUST SPECIFY THE IP OF THE MACHINE USED TO RECEIVE MESSAGES. This defaults to 10.0.0.8. To change the ip address, add the flag:
+`-i <ip address of machine>`
+
+The third argument is the port to use. It defaults to 5005. To change the port, add the flag:
+`-p <port>`
