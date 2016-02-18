@@ -12,7 +12,7 @@ Example:
  ^^ This is your device name (wlp4s0).
 
 2) On computer A (the host) run the following:
-    sudo ./dual.sh $devicename $physicalname $ipaddress
+`sudo ./dual.sh $devicename $physicalname $ipaddress`
 
 This will enable an ad-hoc wireless network on computer A.
 Some operation systems have different daemon names and the script may not properly kill all networking daemons. If you suspect this to be the case (for instance if your gui shows you connected to a network) you will have to manually kill these daemons through systemctl or service.
