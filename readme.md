@@ -67,7 +67,7 @@ This phase was begun but only experimental. Please read [research](documents/res
 for more information. 
 
 ###Usage
-See the [testing script's readme](testing/README.html) for more information and usage. 
+See the [testing script's readme](testing/README.md) for more information and usage. 
 
 ##Research
 ###TLDR;
@@ -83,4 +83,4 @@ In the end, we went with the following technologies.
 ##Hardware
 While the hardware can vary (we have not extensivly tested various devices), we tested it 
 primarily on the Atheros Wireless card and TP link cards. Please see 
-[Long Range Test Documents](documents/testing.md) for more extensive details. 
+[Long Range Test Documents](documents/tests.md) for more extensive details. 
