@@ -1,11 +1,11 @@
 ##Main Research Areas
 The main research area, while we understood hardware was a critical
 component to the success (or failure) of this project, focused
-primarily on the software, 802.11 specifications and suggestions 
+primarily on the software, 802.11 specifications, and suggestions 
 to make on technology choices with regard to software. 
 
 ###UDP
-UDP was picked on the onset of the project. We knew that TCP/IP has inbuilt
+UDP was picked at the onset of the project. We knew that TCP/IP has inbuilt
 overheads and timeouts that would require an acknowledgment which would
 definitely time out too soon. UDP only sends out the packets with no expectation
 that it will be received properly or at all. It also doesn't attempt to re-send
@@ -27,7 +27,7 @@ Our research found that it was unnecessary to modify the drivers to make this su
 ###Fountain Code
 Fountain code is a data reconstruction technique discussed
 [here](http://www.mit.edu/~gauri/FountainCodes.pdf). 
-Essentially, on one end, the data is continually be distributed and on the other, it will 
+Essentially, on one end, the data will continually be distributed and on the other, it will 
 wait until it has enough information to construct the data. 
 
 ##Suggestions for future research

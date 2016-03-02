@@ -41,6 +41,7 @@ Challenges: Steep learning curve. Large amount of information to weed through.
 
 Results: ifconfig, iwconfig, and netcat are early options for modifications. Ath9k driver is probably the right choice. Modification of the ath9k driver code will probably not be necessary. Distribution is mostly up to us, and we found that Ubuntu will work fine for our project. 
 
+
 Sprint 5 - Meeting with Professor Singh 
 
 Requirements: Interview Professor Singh to get his thoughts on directions we should take.
@@ -49,8 +50,8 @@ Challenges:
 
 Results: A lot of what he told us was about the hardware that should be used, which isn’t applicable to what we are working on specifically, but he did recommend that we send in ad-hoc mode and provided some information that we maybe could use for a stretch goal including fountain codes and software-defined radio.
 
-Sprint 6 - Automated Pairing and Packet Sending
 
+Sprint 6 - Automated Pairing and Packet Sending
 
 // Someone who can comment on Monitor, Ad-Hoc mode, etc. add notes here!! 
 
@@ -72,6 +73,7 @@ Ground netcat command:	nc -l -u -v <port>
 
 To connect the two machines, we wrote two shell scripts. One, called init_wifi_ad-hoc.sh, places the machine it’s run on into ad-hoc mode and also begins broadcasting an IBSS (Independent Basic Service Set) or ad-hoc network. An ad-hoc network allows two machines to communicate directly to each other without any network infrastructure. The second script, associate.sh, simply causes the machine it’s run on to enter ad-hoc mode and connect to the established ad-hoc network. 
 
+
 Sprint 7 - Disabling RTS / CTS and other Unimportant Processes
 
 Requirements: Data should be sent without unnecessary signals from satellite to ground.
@@ -84,7 +86,8 @@ Wireshark option path: 	 preferences → protocols → display hidden protocol i
 
 Kernel command to disable RTS / CTS packets : 	iw phy phy(1|0) set rts -1
 
-The command was put in both the init_wifi_ad-hoc.sh and associate.sh scripts to automatically disable RTS/CTS when the machines are placed into ad-hoc mode using either script. 
+The command was put in both the init_wifi_ad-hoc.sh and associate.sh scripts (now dual.sh) to automatically disable RTS/CTS when the machines are placed into ad-hoc mode using either script. 
+
 
 Sprint 8 - Optimizing Workflow
 
@@ -93,6 +96,7 @@ Requirements: Create a workflow that could be mirrored by a satellite and ground
 Challenges: 
 
 Results: 
+
 
 Sprint 9 - Testing Methods
 
@@ -109,6 +113,7 @@ tc qdisc add dev <device name> root netem delay 100ms
 
 Running the command on both the machine sending packets and the machine receiving packets will induce a net delay of 200ms.
 
+
 Sprint 10 - Documentation and Delivery
 
 Requirements: GitHub wiki and brain dump of all that we have learned over the course of this project.
@@ -116,8 +121,6 @@ Requirements: GitHub wiki and brain dump of all that we have learned over the co
 Challenges: Consistent formatting and centralization of all information
 
 Results: 
-
-
 
 Sections: 
 

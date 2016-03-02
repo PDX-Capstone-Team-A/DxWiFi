@@ -7,8 +7,8 @@ the current WiFi specifications and attempt to remove those limitations
 if they are software related. 
 
 ##Wrapper
-This simple python wrapper will get you started quickly. It has most of the 
-commands built into it (which use the dual.sh script), but you might still 
+The simple python wrapper [(wifi_wrap.py)](wifi_wrap.py) will get you started quickly. It has most of the 
+commands from the other scripts built into it, but you might still 
 need to use some the python scripts on its own once you are connected. 
 
 ###Usage
@@ -31,15 +31,15 @@ sudo python3 wifi_wrap.py -i 10.0.0.9 -d phy0 -c wlan0
 >
 
 ##Script
-The script will set up an Ad-Hoc between two computers and change the default 
-WiFi settings to the necessary settings
-that we think will make the best possible connection between two computers.
+The [dual.sh](dual.sh) script will set up an Ad-Hoc between two computers and change the
+WiFi settings to what
+we think will make the best possible connection between two computers.
 
 ###Using the scripts
-More extensive options can be found [here](scriptHowTo.md). 
+More extensive options can be found [here](documents/scriptingdocs.md). 
 
 On both computers, run the following script with the following parameters. 
-The [extensive readme](scriptHowTo.md) can explain how to get each individual parameter. 
+The [extensive readme](documents/scriptingdocs.md) can explain how to get each individual parameter. 
 
 ```bash
 sudo ./dual.sh $devicename $physicalname $ipaddress
@@ -50,16 +50,16 @@ Once connected, you can test your connection by pinging the computers ip address
 ping $ipaddress
 ```
 
-The [wifi_back_on.sh](wifi_back_on.sh) file is used to reset the connections back 
+The [wifi_back_on.sh](wifi_back_on.sh) script is used to reset the computer's WiFi settings back 
 to the original state before the dual.sh script was run. To use this, simply type
 ```bash
-./wifi_back_on.sh wlan#
+./wifi_back_on.sh $devicename
 ```
 
 ##Testing
-The testing module is a python script which will use UDP connection to 
-ping the device by sending integer variables to the given IP address, then write
-it to a csv file for later analysis. 
+The testing module includes two python scripts which use a UDP connection to have one device
+ping the other device by sending integer variables. The other device then writes
+them to a csv file for later analysis. 
 
 Another attempt we found much more valuable was to use the multicasting technique
 to remove the need for ACKS which took up much of the bandwith on some of our testing. 
@@ -72,7 +72,7 @@ See the [testing script's readme](testing/README.html) for more information and 
 ##Research
 ###TLDR;
 When the team began researching this project, we investigated many avenues. You can 
-read more detail of the reserach investigated [here](researching.md). 
+read more details of the reserach investigated [here](documents/research.md). 
 In the end, we went with the following technologies. 
 * UDP Communication Protcol
 * UNIX (Tested on Ubuntu)
@@ -83,4 +83,4 @@ In the end, we went with the following technologies.
 ##Hardware
 While the hardware can vary (we have not extensivly tested various devices), we tested it 
 primarily on the Atheros Wireless card and TP link cards. Please see 
-[Long Range Test Documents](documents/longrangetest.md) for more extensive details. 
+[Long Range Test Documents](documents/testing.md) for more extensive details. 

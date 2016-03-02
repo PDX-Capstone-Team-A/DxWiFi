@@ -1,10 +1,10 @@
 This gives an in depth look at the script and extensive explanation as to what we did and why. 
 
 ##IP Suite
-So there are 4 layers to the OSI Model. 
+So there are 7 layers to the OSI Model. Some relevant layers are:
 * Linked Layer
 	* This consists of communication that doesn't always show up in wireshark using default settings. 
-	but there are settings to enable this to make wireshark show this information up. (ASK JE for those dets)
+	But there are settings to enable this to make wireshark show this information up.
 * Internet Layer
 	* Contains information about IP Addresses
 	* As far as we know, everything on the Internet layer and above is currently working for support for 
@@ -25,7 +25,7 @@ We tested this using many different network cards and all code is hardware agnos
  limitations)
 
 ##Software
-All computer are running Linux kernel 3.4 or later. However, kernels as far back as 2.6 *should* work but 
+All computers used for testing were running Linux kernel 3.4 or later. Kernels as far back as 2.6 *should* work but 
 we have not tested it. 
 
 ###Network utilities
@@ -38,7 +38,7 @@ are not suggested for use.
 looking reasons. 
 
 ###Line by line detailed explanation of the script
-This goes line by line as to why we picked what we did and decisions. 
+This explanation explains line by line why we wrote it the way we did. 
 
 ####Lines 18-26
 i) Linux runs daemons (background processes) that typically handle networking. 

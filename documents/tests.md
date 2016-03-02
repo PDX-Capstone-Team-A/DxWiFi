@@ -8,9 +8,8 @@ to Vista House.
 
 ##Goals
 The goal of the tests were to see if there were any unusual happenings
-that we would need to change, such as acknowledgments, etc. While we 
-did extensive research into the 802.11 specs requirement, the specs 
-were comprehensive. 
+that we would need to change, such as acknowledgments, etc. While we did extensive research into the 802.11 specs requirement, the specs 
+were comprehensive to the point that a complete research would be impractical.
 
 
 ##1 & ~2 mile tests
