@@ -1,17 +1,17 @@
 This gives an in depth look at the script and extensive explanation as to what we did and why. 
 
 ##IP Suite
-So there are 7 layers to the OSI Model. Some relevant layers are:
-* Linked Layer
-	* This consists of communication that doesn't always show up in wireshark using default settings. 
-	But there are settings to enable this to make wireshark show this information up.
-* Internet Layer
+There are 7 layers to the OSI Model. Some relevant layers are:
+* Data Link Layer
+	* This consists of communication that doesn't always show up in Wireshark using default settings. 
+	But there are settings to enable this to make Wireshark show this information.
+* Network Layer
 	* Contains information about IP Addresses
 	* As far as we know, everything on the Internet layer and above is currently working for support for 
 	long distance communications
 * Transport Layer
-	* UPD Layer-Great for long distance WiFi (the catch is that it is lossy)
-	* TCP Layer-This has additional verification and will not work for long distance WiFi
+	* UPD Layer: Great for long distance WiFi (the catch is that it is lossy)
+	* TCP Layer: This has additional verification requirements and will not work for long distance WiFi
 	as the handshakes between each packet time out before making the distance
 * Application layer
 	* This is your programming layer (e.g. Python...)
@@ -49,14 +49,14 @@ i) Linux runs daemons (background processes) that typically handle networking.
 		a) Ubuntu <= v.14
 	2) Systemd
 		a) Most other linux based systems use this daemon manager.
-ii) These must be disabled in order to allow for manual control of the networking hardware as the daemons might change configuration without stopping these. There are many different daemons which control networking hardware but the most common is called NetworkManager. This script is written currently using a NetworkManager solution but if your distro uses a different network daemon the process to disable it will be similar. 
+ii) These must be disabled in order to allow for manual control of the networking hardware as the daemons might change configurations. There are many different daemons which control networking hardware but the most common is called NetworkManager. This script is written currently using a NetworkManager solution but if your distro uses a different network daemon the process to disable it will be similar. 
 iii) Upstart solution (line 25)
 iv) Systemd solution (line 20)
  
 ####Line 29
-i. Sets the device down (sort of off) to allow for configuration changes which cannot be made when the device is up (on)
+i. Sets the device down (sort of "off") to allow for configuration changes which cannot be made when the device is up (on)
 ii. Linux names the device drivers & device hardware (logical devices and physical devices). 
-	1) In order to view driver names, you can type ip addr
+	1) In order to view device names, you can type "ip addr"
 		a) Typical device names are similar to wlan0, wlan1…, wlp4s0, wlp4s1…, etc. (device lo does not control Wi-Fi, and any device starting with e.g. en1, … controls only Ethernet ports)
 	2) In order to list physical devices use iw list. 
 		a) Typical physical device names are phy0, phy1…,
@@ -69,7 +69,7 @@ i. Remove any previous ip address settings
 
 ####Line 32
 i. Set ip address and netmask for the device 
-ii. Each device needs two distinct ip address and the same netmask to communicate with each other 
+ii. Each device needs a distinct ip address and the same netmask to communicate with each other 
 iii. The ip address is then used in the application layer to communicate between the two nodes
 iv. Only the last field of the ip address needs to be set
 v. The netmask should remain as 255.255.255.0 or in the notation used in the script as /24 (the 24 represents 24 out of 30 bits)
@@ -82,8 +82,8 @@ Associate to the essid (this can be any string, but must be equal between device
 
 ####Line 37
 i. Turn off RTS/CTS on the network device
-ii. RTS/CTS is a protocol this is optional that will send a flag out if the byte size of a packet is greater than a given threshold. Setting this threshold to -1 disables this threshold. The purpose of this RTS/CTS packet is to solve a networking issue that arises when dealing with a many to one or one to many network topology. 
+ii. RTS/CTS (Request to Send/Clear to Send) is an optional protocol that will send a flag out if the byte size of a packet is greater than a given threshold. Setting this threshold to -1 disables this threshold. The purpose of this RTS/CTS packet is to solve a networking issue that arises when dealing with a "many-to-one" or "one-to-many" network topology. 
 
 ####Line 33
 i. Set the channel to be fixed on transmission. 
-ii. This addresses a physical limitation that a prior group noted that clouds could possibly interfere with the radio signal when the radio signal varies (we have yet to test this is an issue but trusting physics group)
+ii. This addresses a physical limitation that a prior group noted: clouds could possibly interfere with the radio signal when the radio signal varies (we have yet to test this issue but are trusting the physics group).
