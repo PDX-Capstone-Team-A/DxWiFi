@@ -1,5 +1,5 @@
 #Different Tests
-We did many tests at different distances to fine-tune our 
+We conducted many tests at different distances to fine-tune our 
 scripts and see if there were any unexpected outcomes during these
 tests.
 
