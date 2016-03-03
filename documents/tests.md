@@ -17,7 +17,7 @@ The first distance test we attempted was a 1 mile test, then a 1.7
 mile test.  
 
 ###Hardware
-* 2 Laptops
+* 2 Laptops running Linux
 * 2 Wireless Cards
 * 1 Sieve
 * 1 & ~2 mile Clear Line of Sight (LOS)
@@ -40,7 +40,7 @@ We assume this was to do with sending too many packets too quickly overflowing a
 
 ##Radio room test
 ###Hardware
-* 2 Laptops
+* 2 Laptops running Linux
 * 2 Wireless Cards
 
 ###Test goals
@@ -61,6 +61,10 @@ to understand what our suspicion was.
 
 ##12 mile test 
 ###Hardware
+* 2 Laptops running Linux
+* 1 Wireless Card
+* 1 Sieve
+* 1 Antenna
 
 ###Test goals
 While we had done some testing at 1 & 2 miles, we had found 
