@@ -41,7 +41,7 @@ We assume this was to do with sending too many packets too quickly overflowing a
 ##Radio room test
 ###Hardware
 * 2 Laptops running Linux
-* 2 Wireless Cards
+* 2 Wireless Cards (TL-WN722N)
 
 ###Test goals
 In this test, we wanted to see if there was any unusual packet loss
@@ -62,9 +62,11 @@ to understand what our suspicion was.
 ##12 mile test 
 ###Hardware
 * 2 Laptops running Linux
-* 1 Wireless Card
-* 1 Sieve
-* 1 Antenna
+* 2 Wireless Card (1 Atheros and 1 [ZCOM ZCN-722M](http://www.zcom.com.tw/program1/product_showtext.asp?infoid=C$cE*yQ$x&cmd=1))
+* 1 Power Amp ([Sunhans SH2000P](http://www.amazon.com/Sunhans-Sh-2000-Wireless-Repeater-Booster/dp/B00N9VUGWE))
+* 2 Antenna (13db Compact Helix from WP-Wireless)
+* 1 Adapter between the amp and the wireless card by MuRata
+* 2 Tripods (To hold antenna's)
 
 ###Test goals
 While we had done some testing at 1 & 2 miles, we had found 
@@ -88,4 +90,3 @@ This doesn't require an acknowledgment and it simply sends data without a requir
 ###Gallery
 
 
-TL-WN722N

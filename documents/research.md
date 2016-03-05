@@ -5,7 +5,7 @@ primarily on the software side of things and the WiFi 802.11 specifications.
 
 ###UDP
 The decision to use UDP packets as our means to send data was made at the start of the project. We knew that TCP/IP has inbuilt
-handshaking procedures that would require the sending of acknoledgment packets which would
+handshaking procedures that would require the sending of acknowledgment packets which would
 definitely timeout too soon. UDP sends out packets with no expectation
 that they will be received properly or at all. It also doesn't attempt to re-send
 the packets if it doesn't receive an acknowledgment. The trouble with this 
